@@ -1,6 +1,6 @@
 {
   "name": "aws-s3-cg-lib",
-  "version": "1.0.0",
+  "version": "1.0.8",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -26,6 +26,9 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "aws-sdk": "^2.1212.0"
+    "aws-sdk": "^2.1212.0",
+    "msgbroker-nxg-cg": "^0.2.0",
+    "process": "^0.11.10",
+    "utils-nxg-cg": "^1.1.15"
   }
 }

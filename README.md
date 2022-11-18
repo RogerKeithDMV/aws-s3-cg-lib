@@ -6,23 +6,23 @@ https://github.com/CloudGenUser/aws-s3-cg-lib
 
 ## _1. Introduction_
 
-This code has the objective to stablish connection with a aws s3 bucket and depending of the flag it will make an diferent action.
+This code has the objective to stablish a connection with the AWS S3 bucket service and depending of the flag it will make an diferent action.
 
-Possible flags and their actions:
+The next are the possible flags and their corresponding actions:
 
-GETLISTBUCKETS - Get the list of all buckets of the account
-CREATETBUCKET - Create a new bucket for the account.
-UPLOADFILE - Uoload a file from a local machine to an specific S3 bucket.
-GETLISTFILESINBUCKET - Get the list of files in a specific bucket.
-DELETEBUCKET - Delete an specific bucket inside the account.
-GETFILE - Get a file that is inside a bucket.
-GETBUCKETGRANTS - Get the grant of a bucket.
+- GETLISTBUCKETS - Get the list of all buckets of the account
+- CREATETBUCKET - Create a new bucket for the account.
+- UPLOADFILE - Uoload a file from a local machine to an specific S3 bucket.
+- GETLISTFILESINBUCKET - Get the list of files in a specific bucket.
+- DELETEBUCKET - Delete an specific bucket inside the account.
+- GETFILE - Get a file that is inside a bucket.
+- GETBUCKETGRANTS - Get the grant of a bucket.
 
-Any other flag will be consider as an invalid value and will return an error message.
+Any other flag will be consider as an invalid values and will return an error message.
 
-As components are used in the NXGP flows regardless that the library should be added on component code, when the flow is running, an exchange and some queues are created using the ID flow (assigned from NXGP).
+The purpose of this library is to handle S3 buckets in the AWS, getting information from the files in the bucket. Also, directories inside the bucket can be handled.
 
-## _2.	Library usage
+## _2.	Library usage_
 
 The library can be installed from npm page with the next:
 
@@ -31,18 +31,18 @@ The library can be installed from npm page with the next:
 
 ### _2.1. CREATETBUCKET_
 
-- **Args:** 
-Needed:
-flag: The string that contains the actinon to execute, can be one of this: CREATETBUCKET, DELETEBUCKET, GETBUCKETGRANTS, GETFILE, GETLISTBUCKETS, GETLISTFILESINBUCKET, UPLOADFILE . The string is not case sensitive.
-accessKey: Is the key that gives you access to the Amazon services.
-secretKey: Is the password related to and access key.
-region: Is a code that Amazon use to give a fast service depending of your zone, you can see the codes and what is the neares code in your zone in the next link: https://aws.amazon.com/es/about-aws/global-infrastructure/regions_az/
-bucketName: The name of the bucket that you want to create.
-Optionals:
+- **Arguments:** 
+    - Required:
+    flag: The string that contains the actinon to execute, can be one of this: CREATETBUCKET, DELETEBUCKET, GETBUCKETGRANTS, GETFILE, GETLISTBUCKETS, GETLISTFILESINBUCKET, UPLOADFILE . The string is not case sensitive.
+    accessKey: Is the key to grant you access to the Amazon services.
+    secretKey: Is the password access related to the key.
+    region: Is a code that corresponds to the zone of the services in wich the Amazon services are alocated according with the user contract to use the AWS services, the list of codes and what is the neares code in user zone can be reviewed in the next link: https://aws.amazon.com/es/about-aws/global-infrastructure/regions_az/
+    bucketName: The name of the bucket that user wants to create.
 
-- **Description:** This request will create a new bucket inside the s3 account.
-.
-- **Sample of a request:**
+
+- **Description:** This request will create a new bucket inside the S3 account.
+- **Sample request:**
+```
 {
 	"flag":"CREATETBUCKET",
     "region":"us-east-1",
@@ -50,34 +50,29 @@ Optionals:
     "secretKey":"SECRETKEYSTRING",
 	"bucketName": "bucketTest"
 }
-
 ```
-
 Resultant sample:
-
+```
 {
 	response: "Bucket created successfully at x location."
 }
-
-In case of some error the library will return the exception thrown by the S3 service.
-
-
 ```
+
+In case of some error the library will return the corresponding exception in the S3 service.
 
 ### _2.2. DELETEBUCKET_
 
-- **Args:** 
-Needed:
-flag: The string that contains the actinon to execute, can be one of this: CREATETBUCKET, DELETEBUCKET, GETBUCKETGRANTS, GETFILE, GETLISTBUCKETS, GETLISTFILESINBUCKET, UPLOADFILE . The string is not case sensitive.
-accessKey: Is the key that gives you access to the Amazon services.
-secretKey: Is the password related to and access key.
-region: Is a code that Amazon use to give a fast service depending of your zone, you can see the codes and what is the neares code in your zone in the next link: https://aws.amazon.com/es/about-aws/global-infrastructure/regions_az/
-bucketName: The name of the bucket that will be deleted.
-Optionals:
+- **Arguments:** 
+    - Required:
+    flag: The string that contains the actinon to execute, can be one of this: CREATETBUCKET, DELETEBUCKET, GETBUCKETGRANTS, GETFILE, GETLISTBUCKETS, GETLISTFILESINBUCKET, UPLOADFILE . The string is not case sensitive.
+    accessKey: Is the key to grant you access to the Amazon services.
+    secretKey: Is the password access related to the key.
+    region: Is a code that corresponds to the zone of the services in wich the Amazon services are alocated according with the user contract to use the AWS services, the list of codes and what is the neares code in user zone can be reviewed in the next link: https://aws.amazon.com/es/about-aws/global-infrastructure/regions_az/
+    bucketName: The name of the bucket to be deleted.
 
-- **Description:** This request is used to delete one of the buckets inside a s3 account.
-.
-- **Sample of a request:**
+- **Description:** This request is used to delete one of the buckets inside a S3 account.
+- **Sample request:**
+```
 {
 	"flag":"DELETEBUCKET",
     "region":"us-east-1",
@@ -85,32 +80,28 @@ Optionals:
     "secretKey":"SECRETKEYSTRING",
 	"bucketName": "bucketTest"
 }
-
 ```
-
 Resultant sample:
-
-{response:"Bucket bucketTest was successfully removed."}
-
-In case of some error the library will return the exception thrown by the S3 service.
-
 ```
-
+{
+    response:"Bucket bucketTest was successfully removed."
+}
+```
+In case of some error the library will return the corresponding exception in the S3 service.
 
 ### _2.3. GETBUCKETGRANTS_
 
-- **Args:** 
-Needed:
-flag: The string that contains the actinon to execute, can be one of this: CREATETBUCKET, DELETEBUCKET, GETBUCKETGRANTS, GETFILE, GETLISTBUCKETS, GETLISTFILESINBUCKET, UPLOADFILE . The string is not case sensitive.
-accessKey: Is the key that gives you access to the Amazon services.
-secretKey: Is the password related to and access key.
-region: Is a code that Amazon use to give a fast service depending of your zone, you can see the codes and what is the neares code in your zone in the next link: https://aws.amazon.com/es/about-aws/global-infrastructure/regions_az/
-bucketName: the name of the bucket whose grants you want to know.
-Optionals:
+- **Arguments:** 
+    - Required:
+    flag: The string that contains the actinon to execute, can be one of this: CREATETBUCKET, DELETEBUCKET, GETBUCKETGRANTS, GETFILE, GETLISTBUCKETS, GETLISTFILESINBUCKET, UPLOADFILE . The string is not case sensitive.
+    accessKey: Is the key to grant you access to the Amazon services.
+    secretKey: Is the password access related to the key.
+    region: Is a code that corresponds to the zone of the services in wich the Amazon services are alocated according with the user contract to use the AWS services, the list of codes and what is the neares code in user zone can be reviewed in the next link: https://aws.amazon.com/es/about-aws/global-infrastructure/regions_az/
+    bucketName: the name of the bucket whose grants are wanted to know.
 
-- **Description:** This request will give you the grants in a bucket inside the s3 account.
-.
-- **Sample of a request:**
+- **Description:** This request will show the grants related to the bucket in the S3 account.
+- **Sample request:**
+```
 {
 	"flag":"GETBUCKETGRANTS",
 	"region":"us-east-1",
@@ -118,11 +109,9 @@ Optionals:
 	"secretKey":"SECRETKEYSTRING",
 	"bucketName":"bucketGrants"
 }
-
 ```
-
 Resultant sample:
-
+```
 {
     "grants": [
         {
@@ -135,72 +124,61 @@ Resultant sample:
         }
     ]
 }
-
-In case of some error the library will return the exception thrown by the S3 service.
-
 ```
-
+In case of some error the library will return the corresponding exception in the S3 service.
 
 ### _2.4. GETFILE_
 
-- **Args:** 
-Needed:
-flag: The string that contains the actinon to execute, can be one of this: CREATETBUCKET, DELETEBUCKET, GETBUCKETGRANTS, GETFILE, GETLISTBUCKETS, GETLISTFILESINBUCKET, UPLOADFILE . The string is not case sensitive.
-accessKey: Is the key that gives you access to the Amazon services.
-secretKey: Is the password related to and access key.
-region: Is a code that Amazon use to give a fast service depending of your zone, you can see the codes and what is the neares code in your zone in the next link: https://aws.amazon.com/es/about-aws/global-infrastructure/regions_az/
-bucketName: The name of the bucket where you want to search a file.
-fileName: The name of the file wich you want to get.
-Optionals:
+- **Arguments:** 
+    - Required:
+    flag: The string that contains the actinon to execute, can be one of this: CREATETBUCKET, DELETEBUCKET, GETBUCKETGRANTS, GETFILE, GETLISTBUCKETS, GETLISTFILESINBUCKET, UPLOADFILE . The string is not case sensitive.
+    accessKey: Is the key to grant you access to the Amazon services.
+    secretKey: Is the password access related to the key.
+    region: Is a code that corresponds to the zone of the services in wich the Amazon services are alocated according with the user contract to use the AWS services, the list of codes and what is the neares code in user zone can be reviewed in the next link: https://aws.amazon.com/es/about-aws/global-infrastructure/regions_az/
+    bucketName: The name of the bucket where the required file is stored.
+    fileName: The name of the file to get from the bucket.
 
-- **Description:** This request will get a file in a bucket inside the s3 account.
-.
-- **Sample of a request:**
+- **Description:** This request will get a file in a bucket inside the S3 account.
+- **Sample request:**
+```
 {
 	"flag":"GETFILE",
 	"region":"us-east-1",
 	"accessKey":"ACCESSKEYSTRING",
 	"secretKey":"SECRETKEYSTRING",
 	"bucketName":"scdf-cg-bucket",
-	"fileName":"testFile.txt"}
-
+	"fileName":"testFile.txt"
+}
 ```
-
 Resultant sample:
-
+```
 {
     "content": "[{"mailFrom": "test@mail.com", "mailPerson": "john Smith"}]"
 }
-
-In case of some error the library will return the exception thrown by the S3 service.
-
 ```
-
+In case of some error the library will return the corresponding exception in the S3 service.
 
 ### _2.5. GETLISTBUCKETS_
 
-- **Args:** 
-Needed:
-flag: The string that contains the actinon to execute, can be one of this: CREATETBUCKET, DELETEBUCKET, GETBUCKETGRANTS, GETFILE, GETLISTBUCKETS, GETLISTFILESINBUCKET, UPLOADFILE . The string is not case sensitive.
-accessKey: Is the key that gives you access to the Amazon services.
-secretKey: Is the password related to and access key.
-region: Is a code that Amazon use to give a fast service depending of your zone, you can see the codes and what is the neares code in your zone in the next link: https://aws.amazon.com/es/about-aws/global-infrastructure/regions_az/
-Optionals:
+- **Arguments:** 
+    - Required:
+    flag: The string that contains the actinon to execute, can be one of this: CREATETBUCKET, DELETEBUCKET, GETBUCKETGRANTS, GETFILE, GETLISTBUCKETS, GETLISTFILESINBUCKET, UPLOADFILE . The string is not case sensitive.
+    accessKey: Is the key to grant you access to the Amazon services.
+    secretKey: Is the password access related to the key.
+    region: Is a code that corresponds to the zone of the services in wich the Amazon services are alocated according with the user contract to use the AWS services, the list of codes and what is the neares code in user zone can be reviewed in the next link: https://aws.amazon.com/es/about-aws/global-infrastructure/regions_az/
 
-- **Description:** This request will get a JSon with all the buckets inside an account.
-.
-- **Sample of a request:**
+- **Description:** This request will get a JSON with a list of all the buckets inside the S3 account.
+- **Sample request:**
+```
 {
 	"flag":"GETLISTBUCKETS",
     "region":"us-east-1",
     "accessKey":"ACCESSKEYSTRING",
     "secretKey":"SECRETKEYSTRING"
 }
-
 ```
-
 Resultant sample:
-
+```
 {
     "response": [
         {
@@ -213,26 +191,22 @@ Resultant sample:
         }
     ]
 }
-
-In case of some error the library will return the exception thrown by the S3 service.
-
 ```
-
+In case of some error the library will return the corresponding exception in the S3 service.
 
 ### _2.6. GETLISTFILESINBUCKET_
 
-- **Args:** 
-Needed:
-flag: The string that contains the actinon to execute, can be one of this: CREATETBUCKET, DELETEBUCKET, GETBUCKETGRANTS, GETFILE, GETLISTBUCKETS, GETLISTFILESINBUCKET, UPLOADFILE . The string is not case sensitive.
-accessKey: Is the key that gives you access to the Amazon services.
-secretKey: Is the password related to and access key.
-region: Is a code that Amazon use to give a fast service depending of your zone, you can see the codes and what is the neares code in your zone in the next link: https://aws.amazon.com/es/about-aws/global-infrastructure/regions_az/
-bucketName: The name of the bucket which you want to get the list of files.
-Optionals:
+- **Arguments:** 
+    - Required:
+    flag: The string that contains the actinon to execute, can be one of this: CREATETBUCKET, DELETEBUCKET, GETBUCKETGRANTS, GETFILE, GETLISTBUCKETS, GETLISTFILESINBUCKET, UPLOADFILE . The string is not case sensitive.
+    accessKey: Is the key to grant you access to the Amazon services.
+    secretKey: Is the password access related to the key.
+    region: Is a code that corresponds to the zone of the services in wich the Amazon services are alocated according with the user contract to use the AWS services, the list of codes and what is the neares code in user zone can be reviewed in the next link: https://aws.amazon.com/es/about-aws/global-infrastructure/regions_az/
+    bucketName: The name of the bucket which is wanted to get the list of files.
 
-- **Description:** This request will get a JSon with all the files inside a bucket.
-.
-- **Sample of a request:**
+- **Description:** This request will get a JSON with a list of all the files inside a bucket in the S3 account.
+- **Sample request:**
+```
 {
 	"flag":"GETLISTFILESINBUCKET",
 	"region":"us-east-1",
@@ -240,11 +214,9 @@ Optionals:
 	"secretKey":"SECRETKEYSTRING",
 	"bucketName":"bucketTest"
 }
-
 ```
-
 Resultant sample:
-
+```
 {
     "response": {
         "IsTruncated": false,
@@ -281,29 +253,24 @@ Resultant sample:
         "CommonPrefixes": []
     }
 }
-
-In case of some error the library will return the exception thrown by the S3 service.
-
 ```
-
+In case of some error the library will return the corresponding exception in the S3 service.
 
 ### _2.7. UPLOADFILE_
 
-- **Args:** 
-Needed:
-flag: The string that contains the actinon to execute, can be one of this: CREATETBUCKET, DELETEBUCKET, GETBUCKETGRANTS, GETFILE, GETLISTBUCKETS, GETLISTFILESINBUCKET, UPLOADFILE . The string is not case sensitive.
-accessKey: Is the key that gives you access to the Amazon services.
-secretKey: Is the password related to and access key.
-region: Is a code that Amazon use to give a fast service depending of your zone, you can see the codes and what is the neares code in your zone in the next link: https://aws.amazon.com/es/about-aws/global-infrastructure/regions_az/
-bucketName: The name of the bucket where you want to create the file.
-content: The text you want to contain the file.
-fileName: The name of the file you want to create.
+- **Arguments:** 
+    - Required:
+    flag: The string that contains the actinon to execute, can be one of this: CREATETBUCKET, DELETEBUCKET, GETBUCKETGRANTS, GETFILE, GETLISTBUCKETS, GETLISTFILESINBUCKET, UPLOADFILE . The string is not case sensitive.
+    accessKey: Is the key to grant you access to the Amazon services.
+    secretKey: Is the password access related to the key.
+    region: Is a code that corresponds to the zone of the services in wich the Amazon services are alocated according with the user contract to use the AWS services, the list of codes and what is the neares code in user zone can be reviewed in the next link: https://aws.amazon.com/es/about-aws/global-infrastructure/regions_az/
+    bucketName: The name of the bucket where is required to create the file.
+    content: The content of the file to be created.
+    fileName: The name of the file to be created.
 
-Optionals:
-
-- **Description:** This request will take a file inside our local environment and will create a copy of it inside a specific bucket.
-.
-- **Sample of a request:**
+- **Description:** This request will create a copy of a file inside a specific bucket in the S3 account.
+- **Sample request:**
+```
 {
 	"flag":"GETLISTFILESINBUCKET",
 	"region":"us-east-1",
@@ -313,13 +280,11 @@ Optionals:
 	"content": "Hello World.",
 	"fileName": "myFile.txt"
 }
-
 ```
-
 Resultant sample:
-
-{response:"File myFile.txt was successfully uploaded in bucketTest."}
-
-In case of some error the library will return the exception thrown by the S3 service.
-
 ```
+{
+    response:"File myFile.txt was successfully uploaded in bucketTest."
+}
+```
+In case of some error the library will return the corresponding exception in the S3 service.
